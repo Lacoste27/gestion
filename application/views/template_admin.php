@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Dashboard</title>
+    <title>Gestion | Dashboard</title>
 
     <!-- Custom fonts for this template-->
     <link href="<?= vendor_url("fontawesome-free/css/all.min.css") ?>" rel="stylesheet" type="text/css">
@@ -41,7 +41,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="<?=base_url("index.php/accueil")?>">
+                <a class="nav-link" href="<?= base_url("index.php/accueil") ?>">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Tableau de bord</span></a>
             </li>
@@ -63,8 +63,8 @@
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Besoins:</h6>
-                        <a class="collapse-item" href="<?=base_url("index.php/besoin")?>">Liste besoins</a>
-                        <a class="collapse-item" href="<?=base_url("index.php/besoin/dispatch")?>">Dispatch besoins</a>
+                        <a class="collapse-item" href="<?= base_url("index.php/besoin") ?>">Liste besoins</a>
+                        <a class="collapse-item" href="<?= base_url("index.php/dispatch/") ?>">Dispatch besoins</a>
                     </div>
                 </div>
             </li>
@@ -78,8 +78,8 @@
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Commandes:</h6>
-                        <a class="collapse-item" href="<?=base_url("index.php/commande/")?>">Liste commandes</a>
-                        <a class="collapse-item" href="<?=base_url("index.php/commande/insert")?>">Enviye de commande </a>
+                        <a class="collapse-item" href="<?= base_url("index.php/commande/") ?>">Liste commandes</a>
+                        <a class="collapse-item" href="<?= base_url("index.php/commande/insert") ?>">Enviye de commande </a>
                     </div>
                 </div>
             </li>
@@ -93,13 +93,13 @@
                 <div id="proformat" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Proformat:</h6>
-                        <a class="collapse-item" href="<?=base_url("index.php/proformat/")?>">Proformat reçu</a>
+                        <a class="collapse-item" href="<?= base_url("index.php/proformat/") ?>">Proformat reçu</a>
                     </div>
                 </div>
             </li>
 
-             <!-- Nav Item - Utilities Collapse Menu -->
-             <li class="nav-item">
+            <!-- Nav Item - Utilities Collapse Menu -->
+            <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#stock" aria-expanded="true" aria-controls="collapseUtilities">
                     <i class="fas fa-fw fa-wrench"></i>
                     <span>Stock</span>
@@ -107,11 +107,26 @@
                 <div id="stock" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Stock:</h6>
-                        <a class="collapse-item" href="<?=base_url("index.php/stock/")?>">stock</a>
-                        <a class="collapse-item" href="<?=base_url("index.php/stock/mouvement")?>">Mouvement de stock</a>
+                        <a class="collapse-item" href="<?= base_url("index.php/stock/") ?>">stock</a>
+                        <a class="collapse-item" href="<?= base_url("index.php/stock/mouvement") ?>">Mouvement de stock</a>
                     </div>
                 </div>
             </li>
+            <!-- Nav Item - Utilities Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#reception" aria-expanded="true" aria-controls="collapseUtilities">
+                    <i class="fas fa-fw fa-wrench"></i>
+                    <span>Reception</span>
+                </a>
+                <div id="reception" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Reception:</h6>
+                        <a class="collapse-item" href="<?= base_url("index.php/reception/") ?>">Insertion bon de reception</a>
+                    </div>
+                </div>
+            </li>
+
+
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
@@ -334,25 +349,13 @@
 
 
                     <div class="container-fluid">
-                        <?= include($page) ?>
+                        <?php include($page); ?>
                     </div>
-
-
                 </div>
                 <!-- /.container-fluid -->
 
             </div>
             <!-- End of Main Content -->
-
-            <!-- Footer -->
-            <footer class="sticky-footer bg-white">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                        <span>Copyright &copy; Your Website 2021</span>
-                    </div>
-                </div>
-            </footer>
-            <!-- End of Footer -->
 
         </div>
         <!-- End of Content Wrapper -->

@@ -1,67 +1,15 @@
-
-
 <?php
+ 
 
-    if (isset($nostock)){
-        if ($nostock==true)
-            {?>
-                <div style ="
-                    background-color: #ff6a08;
-                    height: 40px;
-                    width: 70%;
-                    color: white;
-                    font-weight: 100;
-                    font-size: 20;
-                    margin: auto;
-                    text-align: center;
-                    /* box-shadow: 1px 0px 5px black; */
-                    border-radius: 3px;
-                "> rupture Stock </div>
-               
-               <div style ="
-                    background-color: #2b0bff;
-                    height: 40px;
-                    width: 70%;
-                    color: white;
-                    font-weight: 100;
-                    font-size: 20;
-                    margin: auto;
-                    text-align: center;
-                    /* box-shadow: 1px 0px 5px black; */
-                    border-radius: 3px;
-                     margin-top:5px;
-                "><?php echo $disponible ?>  elements restant  </div>
-               
-            <?php } 
-        else{?>
-             <div style ="
-                    background-color: green;
-                    height: 40px;
-                    width: 70%;
-                    color: white;
-                    font-weight: 100;
-                    font-size: 20;
-                    margin: auto;
-                    text-align: center;
-                    /* box-shadow: 1px 0px 5px black; */
-                    border-radius: 3px;
-                ">Success!</div>
-               
-       <?php }
-    }
-  
+$dataPoints [0]['label']="Restant";
+$dataPoints [0]['y']= $quantiteStock;
+
+
+$dataPoints [1]['label']="Utilisée";
+$dataPoints [1]['y']= $quantiteLany;
 
 
 ?>
-
-
-
-
-
-
-
-
-
 
 
 
@@ -87,11 +35,58 @@
     <!-- Custom styles for this template-->
 		<link href="<?php echo base_url('assets/css/sb-admin-2.min.css') ?>" rel="stylesheet" />
     <style>
-        table, th, td {
-            border: 1px solid black;
-            border-collapse: collapse;
+       #customers {
+        font-family: Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+        }
+
+        #customers td, #customers th {
+        border: 1px solid #ddd;
+        padding: 8px;
+        }
+
+        #customers tr:nth-child(even){background-color: #f2f2f2;}
+
+        #customers tr:hover {background-color: #ddd;}
+
+        #customers th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: left;
+        background-color: #4e73df;;
+        color: white;
         }
     </style>
+
+    <script>
+window.onload = function () {
+ 
+var chart = new CanvasJS.Chart("chartContainer", {
+	animationEnabled: true,
+	exportEnabled: true,
+	title:{
+		text: "Situation Stock"
+	},
+	subtitles: [{
+		text: ""
+	}],
+	data: [{
+		type: "pie",
+		showInLegend: "true",
+		legendText: "{label}",
+		indexLabelFontSize: 16,
+		indexLabel: "{label} - #percent%",
+		yValueFormatString: "฿#,##0",
+		dataPoints: <?php echo json_encode($dataPoints, JSON_NUMERIC_CHECK); ?>
+	}]
+});
+chart.render();
+ 
+}
+</script>
+
+
 </head>
 
 <body id="page-top">
@@ -420,52 +415,66 @@
 
                 
 
-                        <div>
-                        <h1>Gestion de Stock</h1>
-                      
+                        <div style ="background-color:white;color:black;">
+                        <h1>Fiche de gestion de stock d'un produit</h1>
+                        <p>Désignation du produit: <?php echo $mouvement[0]['nom']?></p>
+                        <p>Somme Quantite restant:<?php echo $quantiteStock?></p>
+                        <p>Somme Quantite utilisée:<?php echo $quantiteLany?></p>
+                        
+                            <br>
 
+                        <table style="width:100%"  id="customers" >
+                        <tr>
+                            <th></th>
+                             <th></th>
+                           
+                            <th colspan="3">Entrees</th>
+                            <th colspan="3">Sorties</th>
+                            <th colspan="4">Stock</th>
+                        </tr>
+                        <tr>
+                             <th>Date</th>
+                            <th>Produit</th>
+                            <th>Quantite</th>
+                            <th>Prix unitaire</th>
+                            <th>Montant</th>
+                            <th>Quantite</th>
+                            <th>Prix unitaire</th>
+                            <th>Montant</th>
+                            <th>Quantite</th>
+                            <th>Prix unitaire</th>
+                            <th>Montant</th>
+                        </tr>
+                        <?php for($i=0;$i<count($mouvement);$i++) { 
+                          
+                        ?>
+                            <tr>
+                                <td><?php echo $mouvement[$i]['dateStock']?> </td>
+                                        <td><?php echo $mouvement[$i]['nom']?> </td>
+                                        <td><?php echo $mouvement[$i]['quantiteAjouter']?> </td>
+                                        <td><?php echo $mouvement[$i]['prixAchat']?> </td>
+                                        <td><?php echo ($mouvement[$i]['quantiteAjouter']*$mouvement[$i]['prixAchat'])?> </td>
+                                        <td><?php echo $mouvement[$i]['quantiteUtilise']?> </td>
+                                        <td><?php echo $mouvement[$i]['prixAchat']?> </td>
+                                        <td><?php echo ($mouvement[$i]['quantiteUtilise']*$mouvement[$i]['prixAchat'])?> </td>
+                                        <td><?php echo $mouvement[$i]['quantiteReste']?> </td>
+                                        <td><?php echo $mouvement[$i]['prixAchat']?> </td>
+                                        <td><?php echo ($mouvement[$i]['quantiteReste']*$mouvement[$i]['prixAchat'])?> </td>
+                                    </tr>
+                            <?php } ?>
+                        </table>
+                            
+                     <br><br>
+                         <h2><Strong>Situation Stock</Strong></h2><br>
+                        <div id="chartContainer" style="height: 370px; width: 100%;"></div>
+                        <script src="<?php echo base_url('assets/js/demo/canvasjs.min.js') ?>"></script>
 
-                        <h1>Miditra</h1>
-                        <form action="<?php echo base_url('Stock/saveStock') ?>" method="POST">
-                            <p>Produit:
-                            <select name="idProduit" class="list-group-item">
-                                <?php for($i=0;$i<count($produits);$i++) { ?>
-                                <option value="<?php echo $produits[$i]['id']?>"><?php echo $produits[$i]['nom']?></option>
-                                <?php } ?>
-                            </select><br>
-
-                            prixAchat:<input type="text" name="prixAchat"><br>
-                            Quantite Total:<input type="text" name="quantiteTotal"><br>
-                            Date IN:<input type="date" name="dateStock"><br>
-                            <input type="submit">
-                                </p>    
-                        </form>
-
-
-                        <h1>Mivoaka</h1>
-                        <form action="<?php echo base_url('Stock/mouvement') ?>" method="POST">
-                            <p>Produit:
-                            <select name="idProduit" class="list-group-item">
-                                <?php for($i=0;$i<count($produits);$i++) { ?>
-                                <option value="<?php echo $produits[$i]['id']?>"><?php echo $produits[$i]['nom']?></option>
-                                <?php } ?>
-                            </select><br>
-                            Quantite Total:<input type="text" name="quantiteTotal"><br>
-                            Date OUT :<input type="date" name="dateStock"><br>
-                            <input type="submit">
-                                </p>    
-                        </form>
+                    
 
 
 
 
                         </div>
-
-
-
-
-
-
 
 
 

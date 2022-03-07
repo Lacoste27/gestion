@@ -20,18 +20,11 @@ class Besoin extends CI_Controller {
 	 */
 	public function index(){
         $data = array (
-            'page' => 'besoin/liste_besoin_view.php',
+            'page' => 'besoin/liste_departement_view.php',
             'title' => 'Liste de besoin recu'
         );
 		$this->load->view('template_admin', $data);
 	}
 
-    public function dispatch(){
-        $data = array (
-            'page' => 'besoin/dispatch_besoin_view.php',
-            'title' => 'Dispatch'
-        );
-		$this->load->view('template_admin', $data);
-	}
 
 }

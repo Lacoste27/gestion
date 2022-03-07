@@ -63,8 +63,22 @@
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Besoins:</h6>
-                        <a class="collapse-item" href="<?=base_url("index.php/departement/demande/besoin")?>">Demande besoins</a>
-                        <a class="collapse-item" href="<?=base_url("index.php/departement/besoin/recu")?>">Besoin reçu</a>
+                        <a class="collapse-item" href="<?= base_url("index.php/departement/demande/besoin") ?>">Demande besoins</a>
+                        <a class="collapse-item" href="<?= base_url("index.php/departement/besoin/recu") ?>">Besoin reçu</a>
+                    </div>
+                </div>
+            </li>
+
+            <!-- Nav Item - Utilities Collapse Menu -->
+            <li class="nav-item">
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#devis" aria-expanded="true" aria-controls="collapseUtilities">
+                    <i class="fas fa-fw fa-wrench"></i>
+                    <span>Devis</span>
+                </a>
+                <div id="devis" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Devis:</h6>
+                        <a class="collapse-item" href="<?= base_url("index.php/devis/") ?>">Insertion devis</a>
                     </div>
                 </div>
             </li>
@@ -291,7 +305,7 @@
 
 
                     <div class="container-fluid">
-                        <?= include($page) ?>
+                        <?php include($page) ?>
                     </div>
 
 
